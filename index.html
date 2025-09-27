@@ -14,12 +14,77 @@
 
 <body>
     <div class="clock-section">
+
+        <div class="section-header">
+            <button class="icons" id="light-dark-toggle" title="Toggle Light/Dark Mode">
+                <img src="/resource/icon/moon.svg" alt="Settings Icon" class="settings-icon-image">
+            </button>
+            <button class="icons" id="settings-open-btn" title="Open Settings">
+                <img src="/resource/icon/settings.svg" alt="Settings Icon" class="settings-icon-image">
+            </button>
+            <button class="icons" id="full-screen-toggle" title="Toggle Full Screen">
+                <img src="/resource/icon/screen.svg" alt="Settings Icon" class="settings-icon-image">
+            </button>
+        </div>
+
+        <div class="clock-circle">
+            <div class="clock-content">
+
+                <div class="timer-label">
+                    <span id="timer-label">Time remaining until break</span>
+                </div>
+
+                <div class="timer-display">
+                    <span id="timer">20:00</span>
+                </div>
+
+                <div class="timer-controls">
+
+                    <div class="primary-button-group">
+                        <button id="start-btn" class="primary-buttons">
+                            <img src="/resource/icon/play_arrow.svg" alt="Play Icon" class="play-icon"><br>
+                            <span class="button-text">Start</span>
+                        </button>
+
+                        <button id="pause-btn" class="primary-buttons" disabled>
+                            <img src="/resource/icon/pause.svg" alt="Pause Icon" class="pause-icon"><br>
+                            <span class="button-text">Pause</span>
+                        </button>
+
+                        <button id="reset-btn" class="primary-buttons" disabled>
+                            <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon"><br>
+                            <span class="button-text">Reset</span>
+                        </button>
+                    </div>
+
+                    <div class="secondary-button-group">
+                        <button id="skip-btn" class="secondary-buttons" disabled>
+                            <div class="flex">
+                                <span class="button-text">Skip to break</span>
+                                <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon">
+                            </div>
+                        </button>
+
+                        <button id="plus-time-btn" class="secondary-buttons" disabled>
+                            <div class="flex">
+                                <span class="button-text">Add +1 min</span>
+                                <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon">
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
         <div class="scroll-indicator">
             <span>scroll down for more</span>
             <div class="arrow-down">
                 <img src="/resource/icon/arrow_down.svg" alt="Arrow Down" class="arrow-down-image">
             </div>
         </div>
+
     </div>
 
     <header>

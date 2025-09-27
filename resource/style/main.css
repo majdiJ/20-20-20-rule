@@ -4,7 +4,9 @@
     --primary-color: rgb(30, 110, 255);
 
     --primary-background-color: rgb(255, 255, 255);
-    --secondary-background-color: rgb(233, 233, 233);
+    --secondary-background-color: rgb(245, 245, 245);
+    --tertiary-background-color: rgb(225, 225, 225);
+    --quaternary-background-color: rgb(204, 204, 204);
     --font-family: Arial, Helvetica, sans-serif;
 
     --side-gap: 15px;
@@ -80,6 +82,10 @@ footer {
     height: 100px;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* Header content */
 header .header-content {
     display: flex;
@@ -111,7 +117,142 @@ header nav ul {
     height: 100%;
 }
 
-/* other */
+/* clock section */
+.clock-section .section-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: right;
+    height: 7vh;
+    padding: var(--side-gap);
+    gap: 12px;
+}
+
+.clock-section .section-header button {
+    border: none;
+    background-color: transparent;
+    opacity: 0.6;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.clock-section .section-header button img {
+    width: 25px;
+    height: 25px;
+}
+
+.clock-section .section-header button:hover {
+    opacity: 0.7;
+    background-color: var(--tertiary-background-color);
+}
+
+.clock-section .clock-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 15px));
+    width: 70vh;
+    height: 70vh;
+    border: 10px solid var(--primary-color);
+    border-radius: 50%;
+    background-color: var(--secondary-background-color);
+}
+
+.clock-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock-content .timer-label {
+    font-size: 1.5rem;
+    color: rgb(95, 95, 95);
+    margin: 25px 0 10px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.clock-content .timer-display {
+    font-size: 9rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+}
+
+.clock-content .timer-controls {
+    width: 55%;
+}
+
+.clock-content .timer-controls .primary-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.clock-content .timer-controls .primary-button-group button {
+    border: 1px solid rgb(215, 215, 215);
+    background-color: var(--tertiary-background-color);
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 0 2px;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.clock-content .timer-controls .primary-button-group button:hover,
+.clock-content .timer-controls .secondary-button-group button:hover {
+    background-color: var(--quaternary-background-color);
+}
+
+.clock-content .timer-controls .secondary-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 0px;
+}
+
+.clock-content .timer-controls .secondary-button-group button {
+    border: 1px solid rgb(215, 215, 215);
+    background-color: var(--tertiary-background-color);
+    border-radius: 15px;
+    padding: 5px 20px;
+    font-size: 1rem;
+    margin: 10px 2px 0;
+    width: 100%;
+    height: 55px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: rgb(95, 95, 95);
+}
+
+.clock-content .timer-controls .primary-button-group button:disabled,
+.clock-content .timer-controls .primary-button-group button:hover:disabled,
+.clock-content .timer-controls .secondary-button-group button:disabled,
+.clock-content .timer-controls .secondary-button-group button:hover:disabled {
+    opacity: 0.5;
+    color: rgb(95, 95, 95);
+    background-color: var(--tertiary-background-color);
+    cursor: not-allowed;
+}
+
+.clock-content .timer-controls .secondary-button-group .flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
 .scroll-indicator {
     position: absolute;
     bottom: 1.9vh;
