@@ -10,28 +10,149 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/resource/style/main.css">
+
+    <!-- JavaScript Files -->
+    <script src="/resource/script/toggle_settings.js" defer></script>
+    <script src="/resource/script/fullscreen.js" defer></script>
+    <script src="/resource/script/toggle_theme.js" defer></script>
+    <script src="/resource/script/clear_cache_and_data.js" defer></script>
+    <script src="/resource/script/clock.js" defer></script>
 </head>
 
 <body>
+    <div class="settings-panel-section">
+        <div class="settings-panel-overlay" id="settings-panel-overlay">
+
+            <div class="settings-panel-header">
+                <h2>Settings</h2>
+                <button class="icons" id="settings-close-btn" title="Close Settings">
+                    <span>Save and Close</span>
+                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image">
+                </button>
+            </div>
+
+            <div class="settings-content">
+                <div class="settings-time-durations">
+                    <div class="time-duration-inputs">
+                        <h3>Time Durations</h3>
+                        <!-- Work duration - 20 minutes -->
+                        <div class="input-group">
+                            <label for="work-duration">Work duration (minutes):</label>
+                            <input type="number" id="work-duration" min="1" max="300" value="20">
+                        </div>
+                        <!-- Rest duration - 20 seconds -->
+                        <div class="input-group">
+                            <label for="rest-duration">Rest duration (seconds):</label>
+                            <input type="number" id="rest-duration" min="1" max="1800" value="20">
+                        </div>
+                        <!-- More time duration - 60 seconds -->
+                        <div class="input-group">
+                            <label for="more-time-duration">More time duration (seconds):</label>
+                            <input type="number" id="more-time-duration" min="1" max="1800" value="60">
+                        </div>
+                        <!-- Instantly go to next rest / work period -->
+                        <div class="input-group">
+                            <label for="instant-next">Instantly go to next rest / work period:</label>
+                            <input type="checkbox" id="instant-next">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-sound-and-notifications">
+                    <div class="sound-settings">
+                        <h3>Sound and Notifications</h3>
+                        <!-- Use system notification -->
+                        <div class="input-group">
+                            <label for="system-notification">Use system notification:</label>
+                            <input type="checkbox" id="system-notification" checked>
+                        </div>
+                        <!-- Mute Notification tone -->
+                        <div class="input-group">
+                            <label for="mute-notification-tone">Mute Notification tone:</label>
+                            <input type="checkbox" id="mute-notification-tone">
+                        </div>
+                        <!-- Mute Alarm tone -->
+                        <div class="input-group">
+                            <label for="mute-alarm-tone">Mute Alarm tone:</label>
+                            <input type="checkbox" id="mute-alarm-tone">
+                        </div>
+                        <!-- Alarm tone sound-->
+                        <div class="input-group">
+                            <label for="alarm-tone">Alarm tone:</label>
+                            <select id="alarm-tone">
+                                <option value="option1">option1</option>
+                                <option value="option2">option2</option>
+                                <option value="option3">option3</option>
+                                <!-- This will be dynamic list using json -->
+                            </select>
+                            <span class="play-sound" id="alarm-tone-sample">Play sample</span>
+                        </div>
+                        <!-- Spoken announcements -->
+                        <div class="input-group">
+                            <label for="spoken-announcements">Spoken announcements:</label>
+                            <input type="checkbox" id="spoken-announcements">
+                        </div>
+                        <!-- Spoken announcement language -->
+                        <div class="input-group">
+                            <label for="spoken-announcement-lang">Spoken announcement language:</label>
+                            <select id="spoken-announcement-lang">
+                                <option value="option1">option1</option>
+                                <option value="option2">option2</option>
+                                <option value="option3">option3</option>
+                                <!-- This will be dynamic list using json -->
+                            </select>
+                            <span class="play-sound" id="spoken-announcement-sample">Play sample</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-general">
+                    <div class="general-settings">
+                        <h3>General</h3>
+                        <!-- Theme -->
+                        <div class="input-group theme-toggle">
+                            <label for="theme">Theme:</label>
+                            <select id="theme">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                                <option value="system">System Default</option>
+                            </select>
+                        </div>
+                        <!-- Clear cache and data -->
+                        <div class="input-group">
+                            <a href="#" class="clear-cache-action">Clear cache and data</a>
+                        </div>
+                        <!-- Reset to default settings -->
+                        <div class="input-group">
+                            <a href="#" class="clear-cache-action">Reset to default settings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div class="clock-section">
 
         <div class="section-header">
             <button class="icons" id="light-dark-toggle" title="Toggle Light/Dark Mode">
-                <img src="/resource/icon/moon.svg" alt="Settings Icon" class="settings-icon-image">
+                <img src="/resource/icon/moon_sun.svg" alt="theme toggle Icon" class="theme-icon-image">
             </button>
             <button class="icons" id="settings-open-btn" title="Open Settings">
                 <img src="/resource/icon/settings.svg" alt="Settings Icon" class="settings-icon-image">
             </button>
             <button class="icons" id="full-screen-toggle" title="Toggle Full Screen">
-                <img src="/resource/icon/screen.svg" alt="Settings Icon" class="settings-icon-image">
+                <img src="/resource/icon/fullscreen.svg" alt="fullscreen toggle Icon" class="screen-icon-image">
             </button>
         </div>
 
         <div class="clock-circle">
-            <div class="clock-content">
+            <!-- add `alarming` class when timer finishes -->
+            <div class="clock-content-display" style="display: flex;">
 
                 <div class="timer-label">
-                    <span id="timer-label">Time remaining until break</span>
+                    <span id="timer-label">Time remaining until rest</span>
                 </div>
 
                 <div class="timer-display">
@@ -51,6 +172,11 @@
                             <span class="button-text">Pause</span>
                         </button>
 
+                        <button id="pause-btn" class="primary-buttons" disabled style="display: none;">
+                            <img src="/resource/icon/mute.svg" alt="Mute Icon" class="pause-icon"><br>
+                            <span class="button-text">Mute</span>
+                        </button>
+
                         <button id="reset-btn" class="primary-buttons" disabled>
                             <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon"><br>
                             <span class="button-text">Reset</span>
@@ -60,14 +186,14 @@
                     <div class="secondary-button-group">
                         <button id="skip-btn" class="secondary-buttons" disabled>
                             <div class="flex">
-                                <span class="button-text">Skip to break</span>
+                                <span class="button-text">Skip to rest</span>
                                 <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon">
                             </div>
                         </button>
 
                         <button id="plus-time-btn" class="secondary-buttons" disabled>
                             <div class="flex">
-                                <span class="button-text">Add +1 min</span>
+                                <span class="button-text">Add +60 sec</span>
                                 <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon">
                             </div>
                         </button>
@@ -76,6 +202,7 @@
                 </div>
 
             </div>
+
         </div>
 
         <div class="scroll-indicator">
@@ -145,8 +272,15 @@
     </main>
 
     <footer>
-        <div>
-            <p>© 2023 The 20-20-20 Rule Timer. All rights reserved.</p>
+        <div class="footer-content">
+            <p>
+                The 20-20-20 Rule Timer is a simple web application designed to help you follow the 20-20-20 rule for better eye care.<br>
+                This is a personal project, owened and maintained by Majdi Jaigirdar.<br>
+                For any inquiries or feedback, please contact me at: <a href="mailto:contact@majdij.com">contact@MajdiJ.com</a><br>
+                Visit my website: <a href="https://majdij.com" target="_blank" rel="noopener noreferrer">MajdiJ.com</a>
+            </p>
+
+            <p>&copy; 2025 Majdi Jaigirdar. All rights reserved.</p>
         </div>
     </footer>
 </body>

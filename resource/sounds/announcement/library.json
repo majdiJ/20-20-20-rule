@@ -1,0 +1,25 @@
+{
+    "audio": [
+        {
+            "audioName": "English - UK (Default)",
+            "rest": "english_uk_rest.mp3",
+            "work": "english_uk_work.mp3",
+            "default": true
+        },
+        {
+            "audioName": "English US",
+            "rest": "english_us_rest.mp3",
+            "work": "english_us_work.mp3"
+        },
+        {
+            "audioName": "French",
+            "rest": "french_rest.mp3",
+            "work": "french_work.mp3"
+        },
+        {
+            "audioName": "German",
+            "rest": "german_rest.mp3",
+            "work": "german_work.mp3"
+        }
+    ]
+}

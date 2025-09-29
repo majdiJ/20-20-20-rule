@@ -1,0 +1,33 @@
+{
+    "audio": [
+        {
+            "audioName": "Pixel Shooting Star (Default)",
+            "fileName": "pixel_shooting_star.mp3",
+            "default": true
+        },
+        {
+            "audioName": "Pixel Hassium",
+            "fileName": "pixel_hassium.mp3"
+        },
+        {
+            "audioName": "Pixel Clock",
+            "fileName": "pixel_clock.mp3"
+        },
+        {
+            "audioName": "Pixel Sway",
+            "fileName": "pixel_sway.mp3"
+        },
+        {
+            "audioName": "iPhone Buzzer",
+            "fileName": "iphone_buzzer.mp3"
+        },
+        {
+            "audioName": "iPhone Clock",
+            "fileName": "iphone_clock.mp3"
+        },
+        {
+            "audioName": "iPhone Timer",
+            "fileName": "iphone_timer.mp3"
+        }
+    ]
+}
