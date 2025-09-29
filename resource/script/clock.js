@@ -443,10 +443,10 @@
 
     if (nextCycle === 'rest') {
       const secondsToRest = clampInt(restInput?.value, DEFAULTS.restSeconds);
-      timerLabelEl.textContent = `End of session — look 20 feet away for ${secondsToRest} seconds to rest your eyes.`;
+      timerLabelEl.textContent = `End of session, look 20 feet away for ${secondsToRest} seconds to rest your eyes.`;
     } else {
       const secondsToWork = clampInt(workInput?.value, DEFAULTS.workMinutes) * 60;
-      timerLabelEl.textContent = `End of break — back to work for ${Math.floor(secondsToWork/60)} minutes.`;
+      timerLabelEl.textContent = `End of break, back to work for ${Math.floor(secondsToWork/60)} minutes.`;
     }
 
     setButtonsForState('alarming');
