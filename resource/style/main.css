@@ -675,7 +675,7 @@ footer .footer-content p {
 
     /* Main content */
     main .page-content {
-        padding: 7px;
+        padding: 7px 10px;
     }
 }
 
@@ -706,7 +706,7 @@ footer .footer-content p {
 
     /* Main content */
     main .page-content {
-        padding: 10px 13px;
+        padding: 10px 17px;
         /* Abnormal: Does not follow rest of the scalling factors by 12.50% */
     }
 }
@@ -715,7 +715,7 @@ footer .footer-content p {
 @media (max-width: 370px) {
 
     :root {
-        --side-gap: 6px;
+        --side-gap: 7px;
     }
 
     .clock-section .clock-circle {
