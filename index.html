@@ -152,62 +152,64 @@
             </button>
         </div>
 
-        <div class="clock-circle">
-            <!-- add `alarming` class when timer finishes -->
-            <div class="clock-content-display" style="display: flex;">
+        <div class="clock-outer-circle">
+            <div class="clock-circle">
+                <!-- add `alarming` class when timer finishes -->
+                <div class="clock-content-display" style="display: flex;">
 
-                <div class="timer-label">
-                    <span id="timer-label">Time remaining until rest</span>
-                </div>
-
-                <div class="timer-display">
-                    <span id="timer">20:00</span>
-                </div>
-
-                <div class="timer-controls">
-
-                    <div class="primary-button-group">
-                        <button id="start-btn" class="primary-buttons">
-                            <img src="/resource/icon/play_arrow.svg" alt="Play Icon" class="play-icon"><br>
-                            <span class="button-text">Start</span>
-                        </button>
-
-                        <button id="pause-btn" class="primary-buttons" disabled>
-                            <img src="/resource/icon/pause.svg" alt="Pause Icon" class="pause-icon"><br>
-                            <span class="button-text">Pause</span>
-                        </button>
-
-                        <button id="pause-btn" class="primary-buttons" disabled style="display: none;">
-                            <img src="/resource/icon/mute.svg" alt="Mute Icon" class="pause-icon"><br>
-                            <span class="button-text">Mute</span>
-                        </button>
-
-                        <button id="reset-btn" class="primary-buttons" disabled>
-                            <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon"><br>
-                            <span class="button-text">Reset</span>
-                        </button>
+                    <div class="timer-label">
+                        <span id="timer-label">Time remaining until rest</span>
                     </div>
 
-                    <div class="secondary-button-group">
-                        <button id="skip-btn" class="secondary-buttons" disabled>
-                            <div class="flex">
-                                <span class="button-text">Skip to rest</span>
-                                <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon">
-                            </div>
-                        </button>
+                    <div class="timer-display">
+                        <span id="timer">20:00</span>
+                    </div>
 
-                        <button id="plus-time-btn" class="secondary-buttons" disabled>
-                            <div class="flex">
-                                <span class="button-text">Add +60 sec</span>
-                                <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon">
-                            </div>
-                        </button>
+                    <div class="timer-controls">
+
+                        <div class="primary-button-group">
+                            <button id="start-btn" class="primary-buttons">
+                                <img src="/resource/icon/play_arrow.svg" alt="Play Icon" class="play-icon"><br>
+                                <span class="button-text">Start</span>
+                            </button>
+
+                            <button id="pause-btn" class="primary-buttons" disabled>
+                                <img src="/resource/icon/pause.svg" alt="Pause Icon" class="pause-icon"><br>
+                                <span class="button-text">Pause</span>
+                            </button>
+
+                            <button id="mute-btn" class="primary-buttons" disabled style="display: none;">
+                                <img src="/resource/icon/mute.svg" alt="Mute Icon" class="pause-icon"><br>
+                                <span class="button-text">Mute</span>
+                            </button>
+
+                            <button id="reset-btn" class="primary-buttons" disabled>
+                                <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon"><br>
+                                <span class="button-text">Reset</span>
+                            </button>
+                        </div>
+
+                        <div class="secondary-button-group">
+                            <button id="skip-btn" class="secondary-buttons" disabled>
+                                <div class="flex">
+                                    <span class="button-text">Skip to rest</span>
+                                    <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon">
+                                </div>
+                            </button>
+
+                            <button id="plus-time-btn" class="secondary-buttons" disabled>
+                                <div class="flex">
+                                    <span class="button-text">Add +60 sec</span>
+                                    <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon">
+                                </div>
+                            </button>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
-
         </div>
 
         <div class="scroll-indicator">
@@ -220,6 +222,7 @@
     </div>
 
     <header>
+
         <div class="header-content">
             <div class="logo">
                 <img src="/resource/brand/icon_black.png" alt="Logo" class="logo-image light-mode">
@@ -234,7 +237,9 @@
                 </ul>
             </nav>
         </div>
+
         <div class="pseudo-div-radius"></div>
+
     </header>
 
     <main>
@@ -272,9 +277,11 @@
                 </div>
             </div>
         </div>
+
         <div class="pseudo-div-radius-container">
             <div class="pseudo-div-radius"></div>
         </div>
+
     </main>
 
     <footer>

@@ -138,8 +138,9 @@ main {
 
 main .stylised-container {
     margin: 0px var(--side-gap);
+    padding: 0 calc(var(--side-gap) * 1.5);
     background-color: var(--primary-background-color);
-    min-height: 120vh;
+    min-height: 100vh;
 }
 
 main .pseudo-div-radius-container {
@@ -170,6 +171,7 @@ a {
     color: var(--font-link-color);
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: underline;
 }
@@ -230,6 +232,7 @@ header a {
     height: 100%;
     background-color: var(--background-overlay-color);
     backdrop-filter: blur(10px);
+    margin: 0;
 }
 
 .settings-panel-section .settings-panel-overlay {
@@ -237,13 +240,13 @@ header a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 90%;
     max-width: 600px;
     background-color: var(--primary-background-color);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px 30px 30px;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .settings-panel-section .settings-panel-overlay .settings-panel-header {
@@ -315,27 +318,31 @@ header a {
     background-color: var(--tertiary-background-color);
 }
 
+.clock-section .clock-outer-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
 .clock-section .clock-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, calc(-50% - 15px));
-    width: 70vh;
-    height: 70vh;
+    width: min(600px, 80vw);
+    height: min(600px, 80vw);
     border: 10px solid var(--primary-color);
     border-radius: 50%;
     background-color: var(--secondary-background-color);
 }
 
-.clock-section .alarming {
+.clock-circle .alarming {
     background-color: var(--primary-color);
 }
-.clock-section .alarming .timer-label,
-.clock-section .alarming .timer-display {
+
+.clock-circle .alarming .timer-label,
+.clock-circle .alarming .timer-display {
     color: var(--primary-color-text-contrast);
 }
 
-.clock-content-display {
+.clock-circle .clock-content-display {
     width: 100%;
     height: 100%;
     display: flex;
@@ -344,15 +351,16 @@ header a {
     align-items: center;
 }
 
-.clock-content-display .timer-label {
+.clock-circle .clock-content-display .timer-label {
     font-size: 1.5rem;
     color: var(--secondary-font-color);
-    margin: 25px 30px 10px;
+    margin: 3% 0 0;
+    padding: 0 11%;
+    width: 100%;
     text-align: center;
-    padding: 0 10px;
 }
 
-.clock-content-display .timer-display {
+.clock-circle .clock-content-display .timer-display {
     font-size: 9rem;
     color: var(--primary-color);
     font-weight: bold;
@@ -360,15 +368,15 @@ header a {
     font-feature-settings: "tnum";
 }
 
-.clock-content-display .timer-controls {
-    width: 55%;
+.clock-circle .clock-content-display .timer-controls {
+    width: 60%;
 }
 
 .clock-circle .timer-controls .primary-button-group {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
 }
 
 .clock-circle .timer-controls .primary-button-group button {
@@ -389,8 +397,8 @@ header a {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    margin-top: 0px;
+    gap: 4px;
+    margin-top: 8px;
 }
 
 .clock-circle .timer-controls .secondary-button-group button {
@@ -398,7 +406,7 @@ header a {
     background-color: var(--tertiary-background-color);
     border-radius: 15px;
     padding: 5px 20px;
-    margin: 10px 2px 0;
+    margin: 0 2px 0;
     width: 100%;
     height: 55px;
     text-align: left;
@@ -422,13 +430,15 @@ header a {
 }
 
 .clock-circle button {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: bold;
     color: var(--primary-font-color);
 }
 
 .clock-circle button img {
     filter: var(--icon-colour-filter-invert);
+    width: 25px;
+    height: 25px;
 
 }
 
@@ -465,17 +475,188 @@ main .page-content {
     width: 100%;
     max-width: var(--page-content-max-width);
     margin: 0 auto;
-    padding: 60px 10px;
+    padding: 30px 10px;
 }
 
 footer .footer-content {
     width: 100%;
-    padding: 0 calc(var(--side-gap) * 3) calc(var(--side-gap) * 2);
+    padding: 0 calc(var(--side-gap) * 1.5) calc(var(--side-gap) * 1);
     margin: 0 auto;
 }
 
 footer .footer-content p {
-    font-size: 0.90rem;
+    font-size: 0.85rem;
     color: var(--secondary-font-color);
     line-height: 1.4;
+}
+
+/* Screen sizes:
+2560px - UltraWide monitors
+1920px - monitors
+1440px - large laptops
+1024px - laptops / large tablets (landscape)
+795px - tablets (portrait)
+550px - small tablets (portrait) / large phones (landscape)
+450px - large phones
+380px - medium phones
+320px - small phones
+*/
+
+/* Displays smaller than 795px */
+@media (max-width: 795px) {
+    .clock-section {
+        height: 91vh;
+    }
+
+    /* Header content */
+    header .header-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: normal;
+        align-items: normal;
+        min-height: 9vh;
+    }
+
+    /* Header nav */
+    header nav ul {
+        justify-content: left;
+        margin-top: 0px;
+        padding: 0;
+    }
+
+    /* clock section */
+    .clock-section .clock-outer-circle {
+        height: 80vh;
+    }
+
+    .clock-section .clock-circle {
+        width: 500px;
+        height: 500px;
+        border-width: 8.33px;
+    }
+
+    .clock-circle .clock-content-display .timer-label {
+        font-size: 1.25rem;
+    }
+
+    .clock-circle .clock-content-display .timer-display {
+        font-size: 7.49rem;
+    }
+
+    .clock-circle .clock-content-display .timer-controls {
+        width: 65%;
+    }
+
+    .clock-circle .timer-controls .primary-button-group {
+        gap: 3.33px;
+    }
+
+    .clock-circle .timer-controls .primary-button-group button {
+        padding: 8.33px 16.66px;
+        margin: 0 1.5px;
+    }
+
+    .clock-circle .timer-controls .secondary-button-group {
+        gap: 3.33px;
+        margin-top: 6.66px;
+    }
+
+    .clock-circle .timer-controls .secondary-button-group button {
+        padding: 8.33px 16.66px;
+        margin: 0 1.5px;
+        height: 45.83px;
+    }
+
+    .clock-circle button {
+        font-size: 0.8rem;
+        /* Abnormal: Does not follow rest of the scalling factors by 16.67% */
+    }
+
+    .clock-circle button img {
+        filter: var(--icon-colour-filter-invert);
+        width: 20.83px;
+        height: 20.83px;
+
+    }
+
+    .clock-circle .timer-controls .secondary-button-group .flex {
+        gap: 4.16px;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* Main content */
+    main .page-content {
+        padding: 10px;
+    }
+}
+
+/* Displays smaller than 575px */
+@media (max-width: 575px) {
+
+    /* clock section */
+    .clock-section .clock-outer-circle {
+        /* height: 80vh; */
+    }
+
+    .clock-section .clock-circle {
+        width: 400px;
+        height: 400px;
+        border-width: 6.66px;
+    }
+
+    .clock-circle .clock-content-display .timer-label {
+        font-size: 1rem;
+    }
+
+    .clock-circle .clock-content-display .timer-display {
+        font-size: 5.99rem;
+    }
+
+    .clock-circle .clock-content-display .timer-controls {
+        width: 72%;
+    }
+
+    .clock-circle .timer-controls .primary-button-group {
+        gap: 2.66px;
+    }
+
+    .clock-circle .timer-controls .primary-button-group button {
+        padding: 6.66px 13.33px;
+        margin: 0 1.2px;
+    }
+
+    .clock-circle .timer-controls .secondary-button-group {
+        gap: 2.66px;
+        margin-top: 5.33px;
+    }
+
+    .clock-circle .timer-controls .secondary-button-group button {
+        padding: 6.66px 13.33px;
+        margin: 0 1.2px;
+        height: 36.66px;
+    }
+
+    .clock-circle button {
+        font-size: 0.7rem;
+        /* Abnormal: Does not follow rest of the scalling factors by 16.67% */
+    }
+
+    .clock-circle button img {
+        filter: var(--icon-colour-filter-invert);
+        width: 16.66px;
+        height: 16.66px;
+
+    }
+
+    .clock-circle .timer-controls .secondary-button-group .flex {
+        gap: 3.33px;
+    }
+
+    /* Main content */
+    main .page-content {
+        padding: 7px;
+    }
 }
