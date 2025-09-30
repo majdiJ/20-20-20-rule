@@ -117,6 +117,7 @@ header {
     background-color: var(--secondary-background-color);
     position: sticky;
     top: 0;
+    bottom: calc(-1 * var(--border-radius));
 }
 
 header * {
@@ -497,9 +498,9 @@ footer .footer-content p {
 1024px - laptops / large tablets (landscape)
 795px - tablets (portrait)
 550px - small tablets (portrait) / large phones (landscape)
-450px - large phones
+440px - large phones
 380px - medium phones
-320px - small phones
+370px - small phones
 */
 
 /* Displays smaller than 795px */
@@ -596,6 +597,14 @@ footer .footer-content p {
 /* Displays smaller than 575px */
 @media (max-width: 575px) {
 
+    :root {
+        --side-gap: 8px;
+    }
+
+    .clock-section {
+        height: 93vh;
+    }
+
     /* clock section */
     .clock-section .clock-outer-circle {
         /* height: 80vh; */
@@ -655,8 +664,70 @@ footer .footer-content p {
         gap: 3.33px;
     }
 
+    /* Header content */
+    header .header-content {
+        min-height: 7vh;
+    }
+
+    header .main-nav {
+        display: none;
+    }
+
     /* Main content */
     main .page-content {
         padding: 7px;
+    }
+}
+
+/* Displays smaller than 440px */
+@media (max-width: 440px) {
+
+    :root {
+        --side-gap: 6px;
+    }
+
+    .clock-section .clock-circle {
+        width: 350px;
+        height: 350px;
+        border-width: 5.83px;
+    }
+
+    .clock-circle .clock-content-display .timer-label {
+        font-size: 0.87rem;
+    }
+
+    .clock-circle .clock-content-display .timer-display {
+        font-size: 5.24rem;
+    }
+
+    main .stylised-container {
+        padding: 0;
+    }
+
+    /* Main content */
+    main .page-content {
+        padding: 10px 13px;
+        /* Abnormal: Does not follow rest of the scalling factors by 12.50% */
+    }
+}
+
+/* Displays smaller than 370px */
+@media (max-width: 370px) {
+
+    :root {
+        --side-gap: 6px;
+    }
+
+    .clock-section .clock-circle {
+        width: 330px;
+        height: 330px;
+        border-width: 5px;
+    }
+}
+
+/* Displays smaller than 370px */
+@media (max-width: 360px) {
+    .clock-section .clock-circle {
+        transform: scale(0.9);
     }
 }
