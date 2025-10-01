@@ -1,5 +1,5 @@
 /* /resource/script/clock.js
-   Updated: persist alarm/announcement index reliably, enable +time only during running timer
+   Updated: use direct ID lookup for mute button (removed alt-text scanning fallback)
 */
 
 (() => {
@@ -32,15 +32,9 @@
   const spokenAnnouncementsCheckbox = document.getElementById('spoken-announcements');
   const settingsCloseBtn = document.getElementById('settings-close-btn');
 
-  // helper to find the 'mute/dismiss' primary button (duplicate id in HTML)
-  function findMuteButton() {
-    const candidates = Array.from(document.querySelectorAll('.primary-buttons'));
-    return candidates.find(b => {
-      const img = b.querySelector('img');
-      return img && img.alt && img.alt.toLowerCase().includes('mute');
-    }) || null;
-  }
-  let muteBtn = findMuteButton();
+  // helper: use direct ID lookup for mute button (more reliable)
+  // keep a runtime re-query in places where we previously tried to fallback
+  let muteBtn = document.getElementById('mute-btn');
 
   // storage
   const STORAGE_KEY = 'twenty20timer:settings:v2';
@@ -125,7 +119,7 @@
   function formatMMSS(sec) {
     const m = Math.floor(sec / 60);
     const s = Math.max(0, sec % 60);
-    return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   }
   function renderTimerDisplay(sec) {
     if (timerEl) timerEl.textContent = formatMMSS(sec);
@@ -178,7 +172,8 @@
       if (skipBtn) skipBtn.disabled = !(stateBeforePause === 'work');
     } else if (s === 'alarming') {
       if (pauseBtn) pauseBtn.style.display = 'none';
-      muteBtn = muteBtn || findMuteButton();
+      // re-query by ID in case button was added after initial load
+      muteBtn = muteBtn || document.getElementById('mute-btn');
       if (muteBtn) { muteBtn.style.display = ''; muteBtn.disabled = false; }
       if (startBtn) startBtn.disabled = false; // proceed
       if (resetBtn) resetBtn.disabled = false;
@@ -205,7 +200,8 @@
 
   // Populate selects without overwriting user selection if already present in storage
   async function loadLibrariesAndSettings() {
-    const stored = Object.assign({}, DEFAULTS, readStored());
+    // merge in any session-only URL settings present on window.__twenty20_url_settings
+    const stored = Object.assign({}, DEFAULTS, readStored(), window.__twenty20_url_settings || {});
 
     // apply stored to inputs
     if (workInput) workInput.value = clampInt(stored.workMinutes, DEFAULTS.workMinutes);
@@ -220,12 +216,16 @@
     // alarm library
     const alarmLib = await fetchJsonSafe('/resource/sounds/alarms/library.json');
     if (alarmLib && Array.isArray(alarmLib.audio)) {
-      // store library to storage (do not overwrite user index)
-      stored.alarmLibrary = alarmLib;
-      writeStored(stored); // persist libraries for later reference
+      // cache library to storage BUT avoid writing back any session-only settings.
+      // Only persist the library itself and preserve whatever other persisted fields already exist.
+      const prevStored = Object.assign({}, readStored());
+      prevStored.alarmLibrary = alarmLib;
+      writeStored(prevStored); // persist libraries only
+
+      // populate using the merged 'stored' index (this lets session-only index take effect)
       populateAlarmSelect(alarmLib, stored.alarmIndex);
     } else {
-      // leave existing options as-is, but ensure selected using stored index
+      // leave existing options as-is, but ensure selected using merged stored index
       if (alarmToneSelect && alarmToneSelect.options.length > 0) {
         alarmToneSelect.value = stored.alarmIndex || 0;
       }
@@ -234,8 +234,10 @@
     // announcement library
     const annLib = await fetchJsonSafe('/resource/sounds/announcement/library.json');
     if (annLib && Array.isArray(annLib.audio)) {
-      stored.announcementLibrary = annLib;
-      writeStored(stored);
+      const prevStored2 = Object.assign({}, readStored());
+      prevStored2.announcementLibrary = annLib;
+      writeStored(prevStored2);
+
       populateAnnouncementSelect(annLib, stored.announcementIndex);
     } else {
       if (announcementSelect && announcementSelect.options.length > 0) {
@@ -244,13 +246,46 @@
     }
   }
 
+  // --- replace the original populateAlarmSelect() with this ---
   function populateAlarmSelect(lib, selectedIdx) {
     if (!alarmToneSelect || !lib || !Array.isArray(lib.audio)) return;
     alarmToneSelect.innerHTML = '';
     lib.audio.forEach((entry, idx) => {
       const opt = document.createElement('option');
       opt.value = idx;
-      opt.textContent = entry.audioName || `Alarm ${idx+1}`;
+      opt.textContent = entry.audioName || `Alarm ${idx + 1}`;
+      alarmToneSelect.appendChild(opt);
+    });
+
+    // prefer merged stored (persisted + session) index so session-only index shows in UI
+    const storedMerged = Object.assign({}, readStored(), window.__twenty20_url_settings || {});
+    const idxToUse = (typeof storedMerged.alarmIndex === 'number') ? storedMerged.alarmIndex : (selectedIdx || 0);
+    alarmToneSelect.value = Math.min(idxToUse, alarmToneSelect.options.length - 1);
+  }
+
+  // --- replace the original populateAnnouncementSelect() with this ---
+  function populateAnnouncementSelect(lib, selectedIdx) {
+    if (!announcementSelect || !lib || !Array.isArray(lib.audio)) return;
+    announcementSelect.innerHTML = '';
+    lib.audio.forEach((entry, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = entry.audioName || `Announcement ${idx + 1}`;
+      announcementSelect.appendChild(opt);
+    });
+
+    const storedMerged = Object.assign({}, readStored(), window.__twenty20_url_settings || {});
+    const idxToUse = (typeof storedMerged.announcementIndex === 'number') ? storedMerged.announcementIndex : (selectedIdx || 0);
+    announcementSelect.value = Math.min(idxToUse, announcementSelect.options.length - 1);
+  }
+
+  function populateAlarmSelect(lib, selectedIdx) {
+    if (!alarmToneSelect || !lib || !Array.isArray(lib.audio)) return;
+    alarmToneSelect.innerHTML = '';
+    lib.audio.forEach((entry, idx) => {
+      const opt = document.createElement('option');
+      opt.value = idx;
+      opt.textContent = entry.audioName || `Alarm ${idx + 1}`;
       alarmToneSelect.appendChild(opt);
     });
     // Only set selection to stored index if present (do NOT override stored selection)
@@ -265,7 +300,7 @@
     lib.audio.forEach((entry, idx) => {
       const opt = document.createElement('option');
       opt.value = idx;
-      opt.textContent = entry.audioName || `Announcement ${idx+1}`;
+      opt.textContent = entry.audioName || `Announcement ${idx + 1}`;
       announcementSelect.appendChild(opt);
     });
     const stored = readStored();
@@ -320,17 +355,17 @@
 
   function stopAlarmPlayback() {
     if (alarmAudioEl) {
-      try { alarmAudioEl.pause(); alarmAudioEl.currentTime = 0; } catch(e) {}
+      try { alarmAudioEl.pause(); alarmAudioEl.currentTime = 0; } catch (e) { }
       alarmAudioEl = null;
     }
     if (alarmStopTimeout) { clearTimeout(alarmStopTimeout); alarmStopTimeout = null; }
   }
   function stopAnnouncementPlayback() {
     if (announcementAudioEl) {
-      try { announcementAudioEl.pause(); announcementAudioEl.currentTime = 0; } catch(e) {}
+      try { announcementAudioEl.pause(); announcementAudioEl.currentTime = 0; } catch (e) { }
       announcementAudioEl = null;
     } else {
-      try { window.speechSynthesis.cancel(); } catch(e){}
+      try { window.speechSynthesis.cancel(); } catch (e) { }
     }
   }
 
@@ -377,13 +412,13 @@
     if (!stored.systemNotification) return;
     if (!('Notification' in window)) return;
     if (Notification.permission === 'granted') {
-      try { new Notification(title, { body }); } catch(e) { console.warn(e); }
+      try { new Notification(title, { body }); } catch (e) { console.warn(e); }
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then(perm => {
         if (perm === 'granted') {
-          try { new Notification(title, { body }); } catch(e){}
+          try { new Notification(title, { body }); } catch (e) { }
         }
-      }).catch(()=>{});
+      }).catch(() => { });
     }
   }
 
@@ -446,7 +481,7 @@
       timerLabelEl.textContent = `End of session, look 20 feet away for ${secondsToRest} seconds to rest your eyes.`;
     } else {
       const secondsToWork = clampInt(workInput?.value, DEFAULTS.workMinutes) * 60;
-      timerLabelEl.textContent = `End of break, back to work for ${Math.floor(secondsToWork/60)} minutes.`;
+      timerLabelEl.textContent = `End of break, back to work for ${Math.floor(secondsToWork / 60)} minutes.`;
     }
 
     setButtonsForState('alarming');
@@ -543,8 +578,9 @@
     }
   });
 
-  // one-shot mute/dismiss button (find it)
-  muteBtn = muteBtn || findMuteButton();
+  // one-shot mute/dismiss button
+  // re-query by ID in case the button wasn't present at initial parse
+  muteBtn = muteBtn || document.getElementById('mute-btn');
   if (muteBtn) {
     muteBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -566,7 +602,7 @@
       const entry = lib.audio[idx];
       if (!entry) return;
       const url = `/resource/sounds/alarms/${entry.fileName || entry.audioName || ''}`;
-      try { const a = new Audio(url); a.play().catch(()=>{}); } catch(e){ console.warn(e); }
+      try { const a = new Audio(url); a.play().catch(() => { }); } catch (e) { console.warn(e); }
     });
   }
   if (announcementSample) {
@@ -580,7 +616,7 @@
       if (!entry) return;
       const fname = entry.rest || entry.work || entry.fileName;
       const url = `/resource/sounds/announcement/${fname}`;
-      try { const a = new Audio(url); a.play().catch(()=>{}); } catch(e){ console.warn(e); }
+      try { const a = new Audio(url); a.play().catch(() => { }); } catch (e) { console.warn(e); }
     });
   }
 
@@ -645,7 +681,7 @@
 
     const stored = Object.assign({}, DEFAULTS, readStored());
     if (stored.systemNotification && 'Notification' in window && Notification.permission === 'default') {
-      Notification.requestPermission().catch(()=>{});
+      Notification.requestPermission().catch(() => { });
     }
   })();
 
@@ -654,6 +690,36 @@
     getState: () => ({ state, currentCycle, remainingSeconds }),
     start: () => startBtn && startBtn.click(),
     pause: () => pauseBtn && pauseBtn.click(),
-    reset: () => resetBtn && resetBtn.click()
+    reset: () => resetBtn && resetBtn.click(),
+
+    // Apply settings coming from URL. If persist is true, settings are already written to storage
+    // (urlSettings should be an object with the same keys as your storage schema).
+    applyUrlSettings: async (urlSettings = {}, persist = false) => {
+      try {
+        // if persist true we assume url_settings.js already wrote to localStorage; otherwise keep in-memory
+        if (!persist) {
+          // keep session-only settings on window so loadLibrariesAndSettings picks them up
+          window.__twenty20_url_settings = Object.assign({}, urlSettings);
+        } else {
+          // if persist true, also clear any session-only fallback
+          delete window.__twenty20_url_settings;
+        }
+
+        // reload UI from stored + session URL (loadLibrariesAndSettings merges them)
+        await loadLibrariesAndSettings();
+
+        // Recompute timer display if we are in idle state (clock.js already handles 'idle' case in saveSettingsImmediate)
+        if (state === 'idle') {
+          const wm = clampInt(workInput?.value, DEFAULTS.workMinutes);
+          remainingSeconds = wm * 60;
+          renderTimerDisplay(remainingSeconds);
+          timerLabelEl.textContent = 'Time remaining until rest';
+          setButtonsForState('idle');
+        }
+      } catch (e) {
+        console.warn('applyUrlSettings failed', e);
+      }
+    }
   };
+
 })();

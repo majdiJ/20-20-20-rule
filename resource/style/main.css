@@ -223,7 +223,8 @@ header a {
 }
 
 /* Settings section */
-.settings-panel-section {
+.settings-panel-section,
+.shared-configuration-section {
     display: none;
     position: fixed;
     top: 0;
@@ -236,7 +237,8 @@ header a {
     margin: 0;
 }
 
-.settings-panel-section .settings-panel-overlay {
+.settings-panel-section .settings-panel-overlay,
+.shared-configuration-section .shared-configuration-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -250,14 +252,16 @@ header a {
     margin: 0 auto;
 }
 
-.settings-panel-section .settings-panel-overlay .settings-panel-header {
+.settings-panel-section .settings-panel-overlay .settings-panel-header,
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.settings-panel-section .settings-panel-overlay .settings-panel-header button {
+.settings-panel-section .settings-panel-overlay .settings-panel-header button,
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-header button {
     border: none;
     background-color: var(--tertiary-background-color);
     opacity: 1;
@@ -272,17 +276,39 @@ header a {
     gap: 3px;
 }
 
-.settings-panel-section .settings-panel-overlay .settings-panel-header button img {
+.settings-panel-section .settings-panel-overlay .settings-panel-header button img,
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-header button img {
     filter: var(--icon-colour-filter-invert);
 }
 
-.settings-panel-section .settings-panel-overlay .settings-panel-header button:hover {
+.settings-panel-section .settings-panel-overlay .settings-panel-header button:hover,
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-header button:hover {
     opacity: 1;
     background-color: var(--quaternary-background-color);
 }
 
-.settings-panel-section .settings-panel-overlay .settings-content {
+.settings-panel-section .settings-panel-overlay .settings-content,
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-content {
     margin: 30px 20px;
+}
+
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-content .settings-review {
+    background-color: var(--secondary-background-color);
+    padding: 10px 18px;
+    border-radius: 15px;
+}
+
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-content .shared-configuration-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 15px;
+}
+
+
+.shared-configuration-section .shared-configuration-overlay .shared-configuration-content .smaller-note {
+    font-size: 0.85rem;
+    color: var(--secondary-font-color);
 }
 
 /* clock section */

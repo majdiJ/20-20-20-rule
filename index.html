@@ -21,6 +21,7 @@
     <script src="/resource/script/fullscreen.js" defer></script>
     <script src="/resource/script/toggle_theme.js" defer></script>
     <script src="/resource/script/clear_cache_and_data.js" defer></script>
+    <script src="/resource/script/url_settings.js" defer></script>
     <script src="/resource/script/clock.js" defer></script>
 </head>
 
@@ -132,6 +133,59 @@
                             <a href="#" class="clear-cache-action">Reset to default settings</a>
                         </div>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="shared-configuration-section">
+        <div class="shared-configuration-overlay" id="shared-configuration-section-overlay">
+
+            <div class="shared-configuration-header">
+                <h2>Shared Configuration</h2>
+                <button class="icons" id="shared-configuration-close-btn" title="Close Shared Configuration">
+                    <span>Discard</span>
+                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image">
+                </button>
+            </div>
+
+            <div class="shared-configuration-content">
+                <div class="standard-message">
+                    <p>
+                        You've opened a URL with shared settings that may affect the timer (durations, sounds,
+                        notifications, etc.).
+                        Choose whether to save them to your device, use them for this session only, or discard them.
+                    </p>
+                    
+                    <div class="settings-review">
+                        <p class="shared-configuration-dyanmic-review">
+                            <!-- This will be dynamically populated with the settings being shared -->
+                            Work duration: 20 minutes<br>
+                            Rest duration: 20 seconds<br>
+                            More time duration: 60 seconds<br>
+                            Instantly go to next rest / work period: No<br>
+                            Use system notification: Yes<br>
+                            Mute Notification tone: No<br>
+                            Mute Alarm tone: No<br>
+                            Alarm tone: option1<br>
+                            Spoken announcements: No<br>
+                            Spoken announcement language: option1<br>
+                            Theme: System Default
+                        </p>
+                    </div>
+
+                    <div class="shared-configuration-actions">
+                        <a href="#" id="save-shared-settings-btn" class="primary-buttons">Save to device</a>
+                        <a href="#" id="session-shared-settings-btn" class="secondary-buttons">Use for this session</a>
+                        <a href="#" id="discard-shared-settings-btn" class="secondary-buttons">Discard</a>
+                    </div>
+
+                    <p class="smaller-note">
+                        Saving to your device replaces your current settings for future sessions.
+                        Session-only applies them until you close or refresh the page.
+                        Discarding keeps your current settings.
+                    </p>
                 </div>
             </div>
 
