@@ -202,11 +202,31 @@
     hideOverlay();
   }
 
-  // Discard simply hides overlay and does nothing
+  // --- NEW: remove only the shared params from URL without reloading ---
+  function removeSharedParamsFromUrl() {
+    try {
+      const url = new URL(window.location.href);
+      const qp = url.searchParams;
+      for (const param of Object.keys(PARAM_MAP)) {
+        if (qp.has(param)) qp.delete(param);
+      }
+      const newSearch = qp.toString();
+      // build a relative URL (keeps pathname and hash)
+      const newUrl = url.pathname + (newSearch ? `?${newSearch}` : '') + (url.hash || '');
+      history.replaceState(null, '', newUrl);
+    } catch (e) {
+      console.warn('url_settings: removeSharedParamsFromUrl failed', e);
+    }
+  }
+
+  // Discard simply hides overlay and does nothing (now also removes shared URL params)
   function discardSettings() {
     delete window.__twenty20_url_settings_pending;
     delete window.__twenty20_url_settings;
     hideOverlay();
+
+    // remove the shared settings params from the URL so dismissed settings aren't reused/shared
+    removeSharedParamsFromUrl();
   }
 
   // Wire up overlay buttons
