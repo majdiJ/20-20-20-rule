@@ -1,0 +1,16 @@
+{
+  "name": "20-20-20 Rule Timer",
+  "short_name": "20-20-20 Timer",
+  "description": "Follow the 20-20-20 rule: every 20 minutes, look 20 feet away for 20 seconds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/resource/brand/icon_black.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    }
+  ]
+}

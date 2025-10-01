@@ -98,6 +98,13 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -176,6 +183,21 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.noselect {
+    user-select: none;
+    /* Standard */
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Old IE/Edge */
+    -webkit-user-drag: none;
+    /* Safari/Chrome */
+    pointer-events: auto;
+    /* ensure clicks still register */
 }
 
 /* Header content */
@@ -482,7 +504,7 @@ header a {
     bottom: 1.9vh;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 15;
     color: var(--tertiary-font-color);
     font-size: 0.8rem;
 }
@@ -535,7 +557,7 @@ main .page-content {
     font-size: 0.95rem;
 }
 
-.break-schedule-option .break-schedule-footer{
+.break-schedule-option .break-schedule-footer {
     margin-top: 10px;
     font-size: 0.95rem;
 }

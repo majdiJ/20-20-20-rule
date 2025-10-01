@@ -20,11 +20,14 @@
         gtag('config', 'G-HHTWSJDWGQ');
     </script>
 
-
     <!-- Icons, themes and design -->
     <link rel="icon" type="image/png" href="resource/brand/icon_black.png" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/png" href="resource/brand/icon_white.png" media="(prefers-color-scheme: dark)">
-
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/resource/brand/icon_black.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/resource/style/main.css">
@@ -44,9 +47,9 @@
 
             <div class="settings-panel-header">
                 <h2>Settings</h2>
-                <button class="icons" id="settings-close-btn" title="Close Settings">
+                <button class="icons noselect" id="settings-close-btn" title="Close Settings">
                     <span>Save and Close</span>
-                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image">
+                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image noselect">
                 </button>
             </div>
 
@@ -157,9 +160,9 @@
 
             <div class="shared-configuration-header">
                 <h2>Shared Configuration</h2>
-                <button class="icons" id="shared-configuration-close-btn" title="Close Shared Configuration">
+                <button class="icons noselect" id="shared-configuration-close-btn" title="Close Shared Configuration">
                     <span>Discard</span>
-                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image">
+                    <img src="/resource/icon/close.svg" alt="Close Icon" class="close-icon-image noselect">
                 </button>
             </div>
 
@@ -208,14 +211,14 @@
     <div class="clock-section">
 
         <div class="section-header">
-            <button class="icons" id="light-dark-toggle" title="Toggle Light/Dark Mode">
-                <img src="/resource/icon/moon_sun.svg" alt="theme toggle Icon" class="theme-icon-image">
+            <button class="icons noselect" id="light-dark-toggle" title="Toggle Light/Dark Mode">
+                <img src="/resource/icon/moon_sun.svg" alt="theme toggle Icon" class="theme-icon-image noselect">
             </button>
-            <button class="icons" id="settings-open-btn" title="Open Settings">
-                <img src="/resource/icon/settings.svg" alt="Settings Icon" class="settings-icon-image">
+            <button class="icons noselect" id="settings-open-btn" title="Open Settings">
+                <img src="/resource/icon/settings.svg" alt="Settings Icon" class="settings-icon-image noselect">
             </button>
-            <button class="icons" id="full-screen-toggle" title="Toggle Full Screen">
-                <img src="/resource/icon/fullscreen.svg" alt="fullscreen toggle Icon" class="screen-icon-image">
+            <button class="icons noselect" id="full-screen-toggle" title="Toggle Full Screen">
+                <img src="/resource/icon/fullscreen.svg" alt="fullscreen toggle Icon" class="screen-icon-image noselect">
             </button>
         </div>
 
@@ -224,34 +227,34 @@
                 <!-- add `alarming` class when timer finishes -->
                 <div class="clock-content-display" style="display: flex;">
 
-                    <div class="timer-label">
+                    <div class="timer-label noselect">
                         <span id="timer-label">Time remaining until rest</span>
                     </div>
 
-                    <div class="timer-display">
+                    <div class="timer-display noselect">
                         <span id="timer">20:00</span>
                     </div>
 
-                    <div class="timer-controls">
+                    <div class="timer-controls noselect">
 
                         <div class="primary-button-group">
                             <button id="start-btn" class="primary-buttons">
-                                <img src="/resource/icon/play_arrow.svg" alt="Play Icon" class="play-icon"><br>
+                                <img src="/resource/icon/play_arrow.svg" alt="Play Icon" class="play-icon noselect"><br>
                                 <span class="button-text">Start</span>
                             </button>
 
                             <button id="pause-btn" class="primary-buttons" disabled>
-                                <img src="/resource/icon/pause.svg" alt="Pause Icon" class="pause-icon"><br>
+                                <img src="/resource/icon/pause.svg" alt="Pause Icon" class="pause-icon noselect"><br>
                                 <span class="button-text">Pause</span>
                             </button>
 
                             <button id="mute-btn" class="primary-buttons" disabled style="display: none;">
-                                <img src="/resource/icon/mute.svg" alt="Mute Icon" class="pause-icon"><br>
+                                <img src="/resource/icon/mute.svg" alt="Mute Icon" class="pause-icon noselect"><br>
                                 <span class="button-text">Mute</span>
                             </button>
 
                             <button id="reset-btn" class="primary-buttons" disabled>
-                                <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon"><br>
+                                <img src="/resource/icon/reset.svg" alt="Reset Icon" class="reset-icon noselect"><br>
                                 <span class="button-text">Reset</span>
                             </button>
                         </div>
@@ -260,14 +263,14 @@
                             <button id="skip-btn" class="secondary-buttons" disabled>
                                 <div class="flex">
                                     <span class="button-text">Skip to rest</span>
-                                    <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon">
+                                    <img src="/resource/icon/skip.svg" alt="Skip Icon" class="skip-icon noselect">
                                 </div>
                             </button>
 
                             <button id="plus-time-btn" class="secondary-buttons" disabled>
                                 <div class="flex">
                                     <span class="button-text">Add +60 sec</span>
-                                    <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon">
+                                    <img src="/resource/icon/plus.svg" alt="Plus Icon" class="plus-icon noselect">
                                 </div>
                             </button>
                         </div>
@@ -279,10 +282,10 @@
             </div>
         </div>
 
-        <div class="scroll-indicator">
+        <div class="scroll-indicator noselect">
             <span>scroll down for more</span>
             <div class="arrow-down">
-                <img src="/resource/icon/arrow_down.svg" alt="Arrow Down" class="arrow-down-image">
+                <img src="/resource/icon/arrow_down.svg" alt="Arrow Down" class="arrow-down-image noselect">
             </div>
         </div>
 
@@ -292,8 +295,8 @@
 
         <div class="header-content">
             <div class="logo">
-                <img src="/resource/brand/icon_black.png" alt="Logo" class="logo-image light-mode">
-                <img src="/resource/brand/icon_white.png" alt="Logo" class="logo-image dark-mode">
+                <img src="/resource/brand/icon_black.png" alt="Logo" class="logo-image light-mode noselect">
+                <img src="/resource/brand/icon_white.png" alt="Logo" class="logo-image dark-mode noselect">
                 <h1>The 20-20-20 Rule Timer</h1>
             </div>
             <nav class="main-nav">
@@ -623,7 +626,7 @@
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=20&rest=180" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -649,7 +652,7 @@
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=45&rest=300" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -666,20 +669,17 @@
 
                                     <div class="details">
                                         <p>
-                                            Every 30 minutes working, take a 6 minute break. In the first 2 minutes, sit
-                                            at your desk and solely reflect on what new information you have learnt
-                                            and/or information you forgot but relearnt, a mental mind-map (close your
-                                            eyes if it helps). In the next minute, roll your shoulders, stretch your
-                                            arms in the air, breathe whilst reflecting on your progress and what you
-                                            will do after your break. In the last 3 minutes walk around, relax, take
-                                            deep breathes and stretch. Continue working after your break and do the work
-                                            you reflected on doing. Don’t go on your phone during work, and for better
-                                            discipline, no phone time during your breaks either.
+                                            Every 30 minutes working, take a 6 minute break. Spend the first 2 minutes
+                                            mentally reviewing what you learned or re-learned (try a quick mind-map,
+                                            eyes closed if helpful). Use the next minute to roll your shoulders, stretch
+                                            and breathe while noting progress and what you'll do next. In the last 3
+                                            minutes walk around, relax and stretch. Avoid phone use during work, and
+                                            for better discipline, avoid it during breaks too.
                                         </p>
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=30&rest=360" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -705,7 +705,7 @@
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=60&rest=300" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -722,15 +722,12 @@
 
                                     <div class="details">
                                         <p>
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum nam
-                                            perspiciatis ut deserunt, blanditiis, iste neque quo eius eveniet alias
-                                            tempore similique voluptatem nostrum rerum aut ad reprehenderit assumenda
-                                            suscipit!
+                                            Every 15 minutes working, take a 2 minute break. Use the first to notice how your eyes feel, how dry or tired they are, blink a few times to re-lubricate them. reflect on your posture, see if you need to adjust it. Bad posture can lead to more eye strain. Use the next minute to look at something 20 feet away, try and focus on different objects at different distances. This helps relax your eye muscles. Remember to blink often while working.
                                         </p>
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=15&rest=120" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -747,20 +744,16 @@
 
                                     <div class="details">
                                         <p>
-                                            Every 20 minutes working, take a 5 minute break. In the first minute reflect
-                                            on your posture: see if you’ve started slouching subconsciously or out of
-                                            the optimal posture (if you keep going back to a bad posture you may need to
-                                            adjust your ergonomics), look 20 feet away. Spend the rest of the time with
-                                            your eyes closed, take deep slow breaths in and out, focus on your breathing
-                                            (how your chest/body moves, the air, the noise, your nose, etc) if you find
-                                            your mind wanders onto other thoughts, just slowly bring your focus back
-                                            onto your breathing. When the time ends, slowly open your eyes in your own
-                                            time and go back to working.
+                                            Every 20 minutes working, take a 5 minute break. Use the first minute to
+                                            check posture and look about 20 feet away. For the remaining time close
+                                            your eyes, take slow deep breaths and focus on how your body and breath
+                                            feel; if your mind wanders, gently bring attention back to the breath.
+                                            When the break ends, open your eyes slowly and return to work.
                                         </p>
                                     </div>
 
                                     <div class="break-schedule-footer">
-                                        <p><a href="#" class="apply-break-schedule">Try now</a></p>
+                                        <p><a href="/?work=20&rest=300" class="apply-break-schedule">Try now</a></p>
                                     </div>
                                 </div>
                             </div>
