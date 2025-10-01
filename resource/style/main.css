@@ -539,7 +539,12 @@ main .page-content ol li {
     margin: 10px 0;
 }
 
-.youtube-video {
+.page-content .content-text-section {
+    margin-bottom: 35px;
+    line-height: 1.4;
+}
+
+.page-content .youtube-video {
     width: 80%;
     max-width: 650px;
     height: auto;
