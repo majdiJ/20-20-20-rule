@@ -21,7 +21,7 @@
 
     --side-gap: 15px;
     --border-radius: 30px;
-    --page-content-max-width: 900px;
+    --page-content-max-width: 700px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -118,6 +118,7 @@ header {
     position: sticky;
     top: 0;
     bottom: calc(-1 * var(--border-radius));
+    z-index: 10;
 }
 
 header * {
@@ -503,6 +504,40 @@ main .page-content {
     max-width: var(--page-content-max-width);
     margin: 0 auto;
     padding: 30px 10px;
+}
+
+.break-schedule-options {}
+
+.break-schedule-option {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 25px;
+    background-color: var(--secondary-background-color);
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.break-schedule-option .icon .break-schedule-icon {
+    width: 80px;
+    height: auto;
+    filter: var(--icon-colour-filter-invert);
+    opacity: 0.4;
+}
+
+.break-schedule-option h4 {
+    margin: 0 0 10px;
+}
+
+.break-schedule-option p {
+    margin: 0;
+    line-height: 1.1;
+    font-size: 0.95rem;
+}
+
+.break-schedule-option .break-schedule-footer{
+    margin-top: 10px;
+    font-size: 0.95rem;
 }
 
 footer .footer-content {
