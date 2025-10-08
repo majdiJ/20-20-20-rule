@@ -40,6 +40,7 @@
     <script src="/resource/script/url_settings.js" defer></script>
     <script src="/resource/script/clock.js" defer></script>
     <script src="/resource/script/anchor_scroll.js" defer></script>
+    <script src="/resource/script/events_for_analytics.js" defer></script>
 </head>
 
 <body>
@@ -58,21 +59,25 @@
                 <div class="settings-time-durations">
                     <div class="time-duration-inputs">
                         <h3>Time Durations</h3>
+
                         <!-- Work duration - 20 minutes -->
                         <div class="input-group">
                             <label for="work-duration">Work duration (minutes):</label>
                             <input type="number" id="work-duration" min="1" max="300" value="20">
                         </div>
+
                         <!-- Rest duration - 20 seconds -->
                         <div class="input-group">
                             <label for="rest-duration">Rest duration (seconds):</label>
                             <input type="number" id="rest-duration" min="1" max="1800" value="20">
                         </div>
+
                         <!-- More time duration - 60 seconds -->
                         <div class="input-group">
                             <label for="more-time-duration">More time duration (seconds):</label>
                             <input type="number" id="more-time-duration" min="1" max="1800" value="60">
                         </div>
+
                         <!-- Instantly go to next rest / work period -->
                         <div class="input-group">
                             <label for="instant-next">Instantly go to next rest / work period:</label>
@@ -143,11 +148,11 @@
                         </div>
                         <!-- Clear cache and data -->
                         <div class="input-group">
-                            <a href="#" class="clear-cache-action">Clear cache and data</a>
+                            <a href="#" id="clear-cache-btn" class="clear-cache-action">Clear cache and data</a>
                         </div>
                         <!-- Reset to default settings -->
                         <div class="input-group">
-                            <a href="#" class="clear-cache-action">Reset to default settings</a>
+                            <a href="#" id="reset-defaults-btn" class="clear-cache-action">Reset to default settings</a>
                         </div>
                     </div>
                 </div>
@@ -170,7 +175,8 @@
             <div class="shared-configuration-content">
                 <div class="standard-message">
                     <p>
-                        This link contains shared timer settings (durations, sounds, notifications, etc.). Save them to your device, apply them for this session only, or ignore them.
+                        This link contains shared timer settings (durations, sounds, notifications, etc.). Save them to
+                        your device, apply them for this session only, or ignore them.
                     </p>
 
                     <div class="settings-review">
